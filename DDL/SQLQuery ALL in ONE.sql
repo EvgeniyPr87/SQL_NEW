@@ -4,8 +4,11 @@ USE master;
 
 IF EXISTS (SELECT name FROM sys.databases WHERE name = 'SPU_411_ALL')
 BEGIN
+	PRINT 'База данных SPU_411_ALL- существует';
+	PRINT 'удаляем';
 	ALTER DATABASE SPU_411_ALL SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 	DROP DATABASE SPU_411_ALL;
+	PRINT 'База данных удалена';
 END
 
 PRINT 'Создаем базу данных SPU_411_ALL';
@@ -158,7 +161,7 @@ PRINT '					связь "RequiredDisciplines" создана';
 
 CREATE TABLE DependentDisciplines
 (
-discipline			SMALLINT,
+discipline			 SMALLINT,
 dependent_discipline SMALLINT,
 PRIMARY KEY(discipline,dependent_discipline),
 CONSTRAINT FK_DD_Discipline		FOREIGN KEY(discipline)	REFERENCES Disciplines(discipline_id),
