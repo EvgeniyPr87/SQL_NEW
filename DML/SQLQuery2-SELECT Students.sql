@@ -17,11 +17,12 @@ FROM		Students,	Groups,	Directions
 WHERE		[group]			=	group_id
 AND			direction		=	direction_id
 AND			direction_name	LIKE	N'разработка%' --фильтрация 
-ORDER BY	last_name		--DESC--'DESENDING' поубыванию	--ASC --'ASSENDING' по возрастанию
+--ORDER BY	last_name		--DESC--'DESENDING' поубыванию	--ASC --'ASSENDING' по возрастанию
 ;
 
+
 SELECT
-			[Преподаватель]	=	FORMATMESSAGE(N'%s,%s,%s',last_name, first_name,middle_name),
+			[Преподаватель]	=	FORMATMESSAGE(N'%s %s %s',last_name, first_name,middle_name),
 			[Дата рождения]	=	birth_date,
 			[Возраст]		=	CAST(DATEDIFF(DAY, birth_date,GETDATE())/365.25 AS INT)
 FROM Teachers
