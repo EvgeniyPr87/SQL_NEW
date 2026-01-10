@@ -30,6 +30,7 @@ SIZE		=	8 MB,
 MAXSIZE		=	500 MB,
 FILEGROWTH	=	5 MB
 );
+GO
 
 PRINT 'База данных SPU_411_ALL успешно созданна';
 
