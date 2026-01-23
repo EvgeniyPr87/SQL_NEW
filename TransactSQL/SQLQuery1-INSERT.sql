@@ -1,14 +1,14 @@
-USE SPU_411_Import;
+п»їUSE SPU_411_Import;
 
 
 DECLARE	@group				AS	INT			=	(SELECT group_id			FROM Groups			WHERE group_name=N'SPU 411');
 
 --C++
 
-DECLARE	@discipline			AS	SMALLINT	=	(SELECT discipline_id		FROM Disciplines	WHERE discipline_name LIKE	(N'Процедурное%C++'));
+DECLARE	@discipline			AS	SMALLINT	=	(SELECT discipline_id		FROM Disciplines	WHERE discipline_name LIKE	(N'РџСЂРѕС†РµРґСѓСЂРЅРѕРµ%C++'));
 DECLARE	@number_of_lessons	AS	TINYINT		=	(SELECT number_of_lessons	FROM Disciplines	WHERE discipline_id = @discipline)/2;
 DECLARE	@lesson_number		AS	INT			=	0;
-DECLARE	@teacher			AS	INT			=	(SELECT	teacher_id			FROM Teachers		WHERE first_name LIKE(N'Олег'));
+DECLARE	@teacher			AS	INT			=	(SELECT	teacher_id			FROM Teachers		WHERE first_name LIKE(N'РћР»РµРі'));
 DECLARE	@start_date			AS	DATE		=	N'2024-10-26';
 DECLARE	@date				AS	DATE		=	@start_date;
 DECLARE	@start_time			AS	TIME		=	N'10:00';
@@ -27,7 +27,7 @@ DECLARE	@time				AS	TIME		=	@start_time
 --HardWare-ps
 
 DECLARE @discipline1		AS	SMALLINT	=	(SELECT discipline_id		FROM Disciplines	WHERE discipline_name LIKE (N'Hard%'));
-DECLARE	@teacher_HWare		AS	INT			=	(SELECT teacher_id			FROM Teachers		WHERE first_name LIKE (N'Алексей'));
+DECLARE	@teacher_HWare		AS	INT			=	(SELECT teacher_id			FROM Teachers		WHERE first_name LIKE (N'РђР»РµРєСЃРµР№'));
 DECLARE @number_of_lessons1	AS	TINYINT		=	(SELECT number_of_lessons	FROM Disciplines	WHERE discipline_id = @discipline1)/4;
 DECLARE	@lesson_number1		AS	INT			=	0;
 DECLARE	@start_date1		AS	DATE		=	N'2024-10-19';
@@ -44,8 +44,8 @@ DECLARE @date1				AS	DATE		=	@start_date1;
 --------------------------------------------------------------------------
 --Administration Windows
 
-DECLARE	@discipline2		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Администрирование%Windows'));
-DECLARE @teacher2			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Алексей'));
+DECLARE	@discipline2		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'РђРґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ%Windows'));
+DECLARE @teacher2			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РђР»РµРєСЃРµР№'));
 DECLARE @number_of_lessons2	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline2)/4;
 DECLARE	@lesson_number2		AS	INT			=	0;
 DECLARE	@start_date2		AS	DATE		=	N'2024-12-14';
@@ -62,8 +62,8 @@ DECLARE	@date2				AS	DATE		=	@start_date2;
 -------------------------------------------------------------------------------
 --OOP_C++
 
-DECLARE	@discipline3		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Объектно%'));
-DECLARE @teacher3			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Олег'));
+DECLARE	@discipline3		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'РћР±СЉРµРєС‚РЅРѕ%'));
+DECLARE @teacher3			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РћР»РµРі'));
 DECLARE @number_of_lessons3	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline3)/2;
 DECLARE	@lesson_number3		AS	INT			=	0;
 DECLARE	@start_date3		AS	DATE		=	N'2025-04-05';
@@ -83,7 +83,7 @@ DECLARE	@date3				AS	DATE		=	@start_date3;
 --UML and design patterns
 
 DECLARE	@discipline4		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'UML%'));
-DECLARE @teacher4			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Олег'));
+DECLARE @teacher4			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РћР»РµРі'));
 DECLARE @number_of_lessons4	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline4)/2;
 DECLARE	@lesson_number4		AS	INT			=	0;
 DECLARE	@start_date4		AS	DATE		=	N'2025-06-14';
@@ -100,8 +100,8 @@ DECLARE	@date4				AS	DATE		=	@start_date4;
 -------------------------------------------------------------------------------------
 --C#
 
-DECLARE	@discipline5		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Язык%C#'));
-DECLARE @teacher5			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Олег'));
+DECLARE	@discipline5		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'РЇР·С‹Рє%C#'));
+DECLARE @teacher5			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РћР»РµРі'));
 DECLARE @number_of_lessons5	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline5)/2;
 DECLARE	@lesson_number5		AS	INT			=	0;
 DECLARE	@start_date5		AS	DATE		=	N'2025-07-05';
@@ -118,8 +118,8 @@ DECLARE	@date5				AS	DATE		=	@start_date5;
 ---------------------------------------------------------------------------------------
 --Development Windows App on C++
 
-DECLARE	@discipline6		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Разработка%C++'));
-DECLARE @teacher6			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Олег'));
+DECLARE	@discipline6		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Р Р°Р·СЂР°Р±РѕС‚РєР°%C++'));
+DECLARE @teacher6			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РћР»РµРі'));
 DECLARE @number_of_lessons6	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline6)/2;
 DECLARE	@lesson_number6		AS	INT			=	0;
 DECLARE	@start_date6		AS	DATE		=	N'2025-09-06';
@@ -137,8 +137,8 @@ DECLARE	@date6				AS	DATE		=	@start_date6;
 ----------------------------------------------------------------------------------------
 --Development Windows App on C#
 
-DECLARE	@discipline7		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Разработка%C#'));
-DECLARE @teacher7			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Олег'));
+DECLARE	@discipline7		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'Р Р°Р·СЂР°Р±РѕС‚РєР°%C#'));
+DECLARE @teacher7			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РћР»РµРі'));
 DECLARE @number_of_lessons7	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline7)/2;
 DECLARE	@lesson_number7		AS	INT			=	0;
 DECLARE	@start_date7		AS	DATE		=	N'2025-09-27';
@@ -156,7 +156,7 @@ DECLARE	@date7				AS	DATE		=	@start_date7;
 --Database theory
 
 DECLARE	@discipline8		AS	SMALLINT	=	(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE (N'%MS SQL Server'));
-DECLARE @teacher8			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'Олег'));
+DECLARE @teacher8			AS	INT			=	(SELECT teacher_id FROM Teachers WHERE first_name LIKE (N'РћР»РµРі'));
 DECLARE @number_of_lessons8	AS	TINYINT		=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline8)/2;
 DECLARE	@lesson_number8		AS	INT			=	0;
 DECLARE	@start_date8		AS	DATE		=	N'2025-10-11';
