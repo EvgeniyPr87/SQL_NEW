@@ -1,17 +1,17 @@
-USE SPU_411_Import;
+п»їUSE SPU_411_Import;
 
 SELECT 
-			[Группа]		=	group_name,
-			[Дисциплина]	=	discipline_id,
-			[Преподаватель]	=	FORMATMESSAGE(N'%s %s %s', last_name,first_name,middle_name),
-			[Дата]			=	[date],
-			[Время]			=	[time],
-			[Статус]		=	IIF(spent=1, N'Проведено', N'Запланировано')
+			[Р“СЂСѓРїРїР°]			=		group_name,
+			[Р”РёСЃС†РёРїР»РёРЅР°]		=		discipline_id,
+			[РџСЂРµРїРѕРґР°РІР°С‚РµР»СЊ]		=		FORMATMESSAGE(N'%s %s %s', last_name,first_name,middle_name),
+			[Р”Р°С‚Р°]				=		[date],
+			[Р’СЂРµРјСЏ]				=		[time],
+			[РЎС‚Р°С‚СѓСЃ]			=		IIF(spent=1, N'РџСЂРѕРІРµРґРµРЅРѕ', N'Р—Р°РїР»Р°РЅРёСЂРѕРІР°РЅРѕ')
 FROM		Schedule
-JOIN		Groups			ON	[group]		=	group_id
-JOIN		Disciplines		ON	discipline	=	discipline_id
-JOIN		Teachers		ON	teacher		=	teacher_id
-WHERE		[group_name]	=	N'SPU 411'
-ORDER	BY	[date]
+JOIN		Groups				ON		[group]		=	group_id
+JOIN		Disciplines			ON		discipline	=	discipline_id
+JOIN		Teachers			ON		teacher		=	teacher_id
+WHERE		[group_name]		=		N'SPU 411'
+ORDER BY	[date]
 ;
 

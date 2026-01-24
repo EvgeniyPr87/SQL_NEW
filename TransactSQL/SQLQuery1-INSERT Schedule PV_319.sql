@@ -42,7 +42,7 @@ DECLARE		@count				AS	INT				=	1;
 DECLARE		@total_disciplines	AS	INT				=	(SELECT COUNT(*) FROM @disciplines);
 
 DECLARE		@number_of_lessons	AS	TINYINT;
-DECLARE		@discipline	AS	SMALLINT;
+DECLARE		@discipline			AS	SMALLINT;
 DECLARE		@discipline_name	AS	NVARCHAR(150);
 DECLARE		@interval			AS	INT;
 
@@ -56,11 +56,11 @@ PRINT(@start_time);
 
 -- Удаляю предыдущее расписание
 ---------------------------------------------------------------
-IF EXISTS(SELECT 1 FROM  Schedule WHERE [group] =@group) 
-BEGIN
-	DELETE FROM Schedule
-	WHERE [group] = @group;
-END;
+--IF EXISTS(SELECT 1 FROM  Schedule WHERE [group] =@group) 
+--BEGIN
+--	DELETE FROM Schedule
+--	WHERE [group] = @group;
+--END;
 -------------------------------------------------------------------
 
 
@@ -116,7 +116,9 @@ VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 		SET @count=@count+1;
 		SET	@start_date=@date;
 		
-END
+END;
+
+
 
 
 

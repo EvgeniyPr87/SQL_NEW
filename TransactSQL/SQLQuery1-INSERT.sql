@@ -248,78 +248,88 @@ DECLARE	@date8				AS	DATE		=	@start_date8;
 --		BREAK;
 --END
 
---DECLARE	@interval	INT;
+DECLARE	@interval	INT;
 
---PRINT 'C++'
---WHILE	(@lesson_number <= @number_of_lessons)
---BEGIN
---		PRINT('--------------------------------------');
---		PRINT (@date);
---		----------------------------------------------
---		SET @time=@start_time;
---		INSERT Schedule
---		([group], discipline, teacher, [date], [time], spent)
---VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0 ));
---		PRINT (@time);
---		SET @lesson_number=@lesson_number+1;
---		-----------------------------------------------
---		SET @time = DATEADD(MINUTE, 95, @time);
---		PRINT (@time);
---		INSERT Schedule
---		([group], discipline, teacher, [date], [time], spent)
---VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
---		SET @lesson_number=@lesson_number+1;
---		------------------------------------------------
---		SET @time = DATEADD(MINUTE, 95, @time);
---		PRINT (@time);
---		INSERT Schedule
---		([group], discipline, teacher, [date], [time], spent)
---VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0 ));
---		SET @lesson_number=@lesson_number+1;
---		--------------------------------------------------
+PRINT 'C++'
+WHILE	(@lesson_number <= @number_of_lessons)
+BEGIN
+		PRINT('--------------------------------------');
+		PRINT (@date);
+		----------------------------------------------
+		SET @time=@start_time;
+		INSERT Schedule
+		([group], discipline, teacher, [date], [time], spent)
+VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0 ));
+		PRINT (@time);
+		SET @lesson_number=@lesson_number+1;
+		-----------------------------------------------
+		SET @time = DATEADD(MINUTE, 95, @time);
+		PRINT (@time);
+		INSERT Schedule
+		([group], discipline, teacher, [date], [time], spent)
+VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+		SET @lesson_number=@lesson_number+1;
+		------------------------------------------------
+		SET @time = DATEADD(MINUTE, 95, @time);
+		PRINT (@time);
+		INSERT Schedule
+		([group], discipline, teacher, [date], [time], spent)
+VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0 ));
+		SET @lesson_number=@lesson_number+1;
+		--------------------------------------------------
 		
---		IF (@date=@date1  OR @date= @date2)
---			SET @interval=14;
---		ELSE
---			SET @interval=7;
+		IF (@date=@date1  OR @date= @date2)
+			SET @interval=14;
+		ELSE
+			SET @interval=7;
 
---	SET @date = DATEADD(DAY, @interval, @date);
+	SET @date = DATEADD(DAY, @interval, @date);
 
---END
+END
 
 -----------------------------------------------------------
 --OOP_C++
 
---PRINT 'OOP_C++'
---WHILE (@lesson_number3 <= @number_of_lessons3)
---BEGIN
---		PRINT('----------------------------------------');
---		PRINT @date3;
---		SET @time = @start_time;
---		INSERT	Schedule
---		([group],discipline, teacher, [date], [time], spent)
---VALUES	(@group,	@discipline3,	@teacher3, @date3, @time, IIF(@date3<GETDATE(),1,0));
---		PRINT @time;
---		SET @lesson_number3=@lesson_number3+1;
+PRINT 'OOP_C++'
+WHILE (@lesson_number3 <= @number_of_lessons3)
+BEGIN
+		PRINT('----------------------------------------');
+		PRINT @date3;
+		SET @time = @start_time;
 
---		SET	@time = DATEADD(MINUTE,95,@time);
---		PRINT @time;
---		INSERT	Schedule
---		([group], discipline, teacher, [date], [time], spent)
---VALUES	(@group,	@discipline3,	@teacher3, @date3, @time, IIF(@date3<GETDATE(),1,0));
---		SET @lesson_number3=@lesson_number3+1;
+	IF NOT EXISTS (SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date3 AND [time]=@time)
+	BEGIN
+		INSERT	Schedule
+		([group],discipline, teacher, [date], [time], spent)
+		VALUES	(@group,	@discipline3,	@teacher3, @date3, @time, IIF(@date3<GETDATE(),1,0));
+		PRINT @time;
+	END
 
---		SET @time = DATEADD(MINUTE,95,@time);
---		PRINT @time;
---		INSERT	Schedule
---		([group], discipline, teacher, [date], [time], spent)
---VALUES	(@group,	@discipline3,	@teacher3, @date3, @time, IIF(@date3<GETDATE(),1,0));
---		SET @lesson_number3=@lesson_number3+1;
+		SET @lesson_number3=@lesson_number3+1;
+		SET	@time = DATEADD(MINUTE,95,@time);
+		
+	IF NOT EXISTS (SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date3 AND [time]=@time)
+	BEGIN
+		PRINT @time;
+		INSERT	Schedule
+		([group], discipline, teacher, [date], [time], spent)
+		VALUES	(@group,	@discipline3,	@teacher3, @date3, @time, IIF(@date3<GETDATE(),1,0));
+	END
+		SET @lesson_number3=@lesson_number3+1;
+		SET @time = DATEADD(MINUTE,95,@time);
+		
+	IF NOT EXISTS (SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date3 AND [time]=@time)
+	BEGIN
+		PRINT @time;
+		INSERT	Schedule
+		([group], discipline, teacher, [date], [time], spent)
+		VALUES	(@group,	@discipline3,	@teacher3, @date3, @time, IIF(@date3<GETDATE(),1,0));
+	END
 
---		SET @date3=DATEADD(DAY,7,@date3);
---		IF (@lesson_number3>=@number_of_lessons3)
---		BREAK;
---END
+	SET @lesson_number3=@lesson_number3+1;
+	SET @date3=DATEADD(DAY,7,@date3);
+	IF (@lesson_number3>=@number_of_lessons3)BREAK;
+END
 
 
 ---------------------------------------------------------------------------
@@ -502,3 +512,19 @@ DECLARE	@date8				AS	DATE		=	@start_date8;
 --		IF (@lesson_number8>=@number_of_lessons8)
 --		BREAK;
 --END
+
+
+SELECT
+		[Группа]			=		group_name,
+		[Дата]				=		[date]	,
+		[Время]				=		[time],
+		[Дисциплина]		=		discipline,
+		[Преподаватель]		=		FORMATMESSAGE(N'%s %s %s',last_name,first_name,middle_name )
+FROM	Schedule
+JOIN	Groups				ON		([group]=group_id)
+JOIN	Disciplines			ON		discipline=discipline_id
+JOIN	Teachers			ON		teacher=teacher_id
+WHERE	group_name			=		N'SPU 411'
+;
+SELECT COUNT([group]) FROM Schedule JOIN Groups ON [group]=group_id WHERE	group_name=N'SPU 411';
+
