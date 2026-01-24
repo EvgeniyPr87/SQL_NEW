@@ -42,7 +42,7 @@ DECLARE		@count				AS	INT				=	1;
 DECLARE		@total_disciplines	AS	INT				=	(SELECT COUNT(*) FROM @disciplines);
 
 DECLARE		@number_of_lessons	AS	TINYINT;
-DECLARE		@current_discipline	AS	SMALLINT;
+DECLARE		@discipline	AS	SMALLINT;
 DECLARE		@discipline_name	AS	NVARCHAR(150);
 DECLARE		@interval			AS	INT;
 
@@ -67,7 +67,7 @@ END;
 WHILE (@count<=@total_disciplines)
 BEGIN
 	SELECT 
-			@current_discipline	=	discipline_id
+			@discipline	=	discipline_id
 			
 	FROM	@disciplines
 	WHERE	num_id=@count;
@@ -77,7 +77,7 @@ BEGIN
 			@discipline_name	=	discipline_name
 
 	FROM	Disciplines
-	WHERE	discipline_id = @current_discipline;
+	WHERE	discipline_id = @discipline;
 
 	PRINT (@discipline_name);
 
@@ -95,7 +95,7 @@ BEGIN
 		SET @time=@start_time;
 		INSERT Schedule
 		([group], discipline, teacher, [date], [time], spent)
-VALUES	(@group, @current_discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0 ));
+VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0 ));
 		PRINT (@time);
 		SET @lesson_number=@lesson_number+1;
 		-----------------------------------------------
@@ -103,7 +103,7 @@ VALUES	(@group, @current_discipline, @teacher, @date, @time, IIF(@date<GETDATE()
 		PRINT (@time);
 		INSERT Schedule
 		([group], discipline, teacher, [date], [time], spent)
-VALUES	(@group, @current_discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 		SET @lesson_number=@lesson_number+1;
 		------------------------------------------------	
 	IF(@lesson_number%3=0)
