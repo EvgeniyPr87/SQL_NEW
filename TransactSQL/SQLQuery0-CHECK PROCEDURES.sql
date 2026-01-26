@@ -3,7 +3,7 @@
 USE SPU_411_Import;
 
 --EXEC sp_SelectscheduleFull;
---EXEC sp_SelectSchedule N'SPU 411', N'Процедурное%';
+EXEC sp_SelectSchedule N'SPU 411', N'Процедурное%';
 
 DECLARE @messageUser	AS	NVARCHAR(255);
 EXEC sp_InsertSchedulу
@@ -16,3 +16,6 @@ EXEC sp_InsertSchedulу
 			,@number_of_pairs=3
 			,@message=@messageUser
 			;
+
+
+
