@@ -1,4 +1,4 @@
---SQLQuery2-INSERT Schedule Semistacionar PROCEDURE.sql
+п»ї--SQLQuery2-INSERT Schedule Semistacionar PROCEDURE.sql
 
 USE SPU_411_Import;
 GO
@@ -17,39 +17,43 @@ ALTER PROCEDURE sp_InsertSchedule
 			,@message			AS		NVARCHAR(255)	=	' ' OUT
 AS
 BEGIN
-			--создаем переменные и инициализируем их значениями из БД:
+			--СЃРѕР·РґР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ Рё РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РёС… Р·РЅР°С‡РµРЅРёСЏРјРё РёР· Р‘Р”:
 	DECLARE	@discipline			AS		SMALLINT		=	(SELECT discipline_id	FROM Disciplines	WHERE discipline_name = @discipline_name);
 	DECLARE @group				AS		INT				=	(SELECT group_id	FROM Groups	WHERE group_name =@group_name );
 	DECLARE @teacher			AS		INT				=	(SELECT teacher_id	FROM Teachers	WHERE last_name LIKE @teacher_name );
 	DECLARE @lesson_number		AS		INT				=	0;
 	
-			--объявляем дополнительные переменные:
+			--РѕР±СЉСЏРІР»СЏРµРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ:
 	DECLARE @number_of_lessons	AS		TINYINT			=	(SELECT number_of_lessons FROM Disciplines WHERE discipline_id=@discipline );
 	DECLARE @date				AS		DATE			=	@start_date;
 	DECLARE	@current_pairs		AS		TINYINT			=	0;
 	DECLARE @time				AS		TIME;
 
-	--DECLARE	@day TABLE(@namber_day TINYINT, )
+	--DECLARE	@day TABLE(namber_day TINYINT, @day_of_week NVARCHAR(70) );
+	--INSERT  @day	(namber_day,@day_of_week)
+	--VALUES			(1, N'РїРѕРЅРµРґРµР»СЊРЅРёРє' ),(2,N'РІС‚РѕСЂРЅРёРє' ),(3,N'СЃСЂРµРґР°' ),(4,N'С‡РµС‚РІРµСЂРі'),(5,N'РїСЏС‚РЅРёС†Р°'),(6,N'СЃСѓР±Р±РѕС‚Р°'),(7,N'РІРѕСЃРєСЂРµСЃРµРЅСЊРµ');
 
-			--проверяем введенные данные:
+					
+
+			--РїСЂРѕРІРµСЂСЏРµРј РІРІРµРґРµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ:
 	--IF NOT EXISTS(SELECT TOP 1 * FROM Groups WHERE group_id=@group)
 	IF @group IS NULL
 	BEGIN
-		SET @message='Данной группы не существует в БД';
+		SET @message	=	'Р”Р°РЅРЅРѕР№ РіСЂСѓРїРїС‹ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РІ Р‘Р”';
 		RETURN;
 	END
 
 	--IF NOT EXISTS(SELECT TOP 1 * FROM Disciplines WHERE discipline_id=@discipline)
 	IF @discipline IS NULL
 	BEGIN
-		SET @message='Данной дисциплины не найдено в БД';
+		SET @message	=	'Р”Р°РЅРЅРѕР№ РґРёСЃС†РёРїР»РёРЅС‹ РЅРµ РЅР°Р№РґРµРЅРѕ РІ Р‘Р”';
 		RETURN;
 	END
 
 	--IF NOT EXISTS(SELECT TOP 1 * FROM Teachers WHERE teacher_id=@teacher)
 	IF @teacher IS NULL
 	BEGIN
-		SET @message='Указанный преподаватель не найден в БД';
+		SET @message	=	'РЈРєР°Р·Р°РЅРЅС‹Р№ РїСЂРµРїРѕРґР°РІР°С‚РµР»СЊ РЅРµ РЅР°Р№РґРµРЅ РІ Р‘Р”';
 		RETURN;
 	END;
 
@@ -85,7 +89,7 @@ BEGIN
 				SET @time=DATEADD(MINUTE,(@pair_time+@break_time),@time);
 		
 		END
-			-- нужно привязать интервал к дням недели
+			-- РЅСѓР¶РЅРѕ РїСЂРёРІСЏР·Р°С‚СЊ РёРЅС‚РµСЂРІР°Р» Рє РґРЅСЏРј РЅРµРґРµР»Рё
 			SET @date=DATEADD(DAY,@interval,@date);
 	END
 END
