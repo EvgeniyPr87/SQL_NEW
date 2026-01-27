@@ -13,13 +13,13 @@ ALTER PROCEDURE sp_InsertSchedule
 			,@pair_time			AS		TINYINT			=	80
 			,@break_time		AS		TINYINT			=	15
 			,@interval			AS		SMALLINT		=	7
-			,@number_of_pairs	AS		TINYINT			=	1
-			,@stacionar			AS		BIT				=	1
+			,@number_of_pairs	AS		TINYINT			=	2
+			,@stacionar			AS		BIT				=	0
 			,@message			AS		NVARCHAR(255)	=	' ' OUT
 AS
 BEGIN
 			--создаем переменные и инициализируем их значениями из БД:
-	DECLARE	@discipline			AS		SMALLINT		=	(SELECT discipline_id	FROM Disciplines	WHERE discipline_name = @discipline_name);
+	DECLARE	@discipline			AS		SMALLINT		=	(SELECT discipline_id	FROM Disciplines	WHERE discipline_name LIKE @discipline_name);
 	DECLARE @group				AS		INT				=	(SELECT group_id	FROM Groups	WHERE group_name =@group_name );
 	DECLARE @teacher			AS		INT				=	(SELECT teacher_id	FROM Teachers	WHERE last_name LIKE @teacher_name );
 	DECLARE @lesson_number		AS		INT				=	0;
@@ -60,7 +60,7 @@ BEGIN
 		RETURN;
 	END;
 
-	IF(@stacionar!=1)
+	IF(@stacionar=0)
 	BEGIN
 	PRINT N'Полустационар';
 	SET @number_of_lessons=@number_of_lessons/2;
@@ -72,14 +72,13 @@ BEGIN
 		PRINT'--------------------------------';
 		PRINT @discipline_name;
 		PRINT @date;
-		PRINT @time;
+		--PRINT @time;
 
 		SET @time=@start_time;
 		SET @current_pairs=0;
 
 		WHILE(@current_pairs<@number_of_pairs AND @lesson_number<@number_of_lessons)
 		BEGIN
-			
 			PRINT @time;
 
 		IF NOT EXISTS(SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date AND [time]=@time)
@@ -94,12 +93,19 @@ BEGIN
 
 			SET @current_pairs=@current_pairs+1;
 
-			IF (@current_pairs<@number_of_pairs AND @lesson_number<@number_of_lessons)
-				SET @time=DATEADD(MINUTE,(@pair_time+@break_time),@time);
+			--IF (@current_pairs!=@number_of_pairs AND @lesson_number<@number_of_lessons)
+			SET @time=DATEADD(MINUTE,(@pair_time+@break_time),@time);
 		
 		END
 			-- нужно привязать интервал к дням недели
 			SET @date=DATEADD(DAY,@interval,@date);
 	END
+
+	PRINT @group;
+	PRINT @discipline;
+	PRINT @current_pairs;
+	PRINT @number_of_lessons;
+
+
 END
 

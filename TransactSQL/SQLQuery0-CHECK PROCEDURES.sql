@@ -11,9 +11,11 @@ EXEC	sp_InsertSchedule
 			,@teacher_name			=	N'Ковтун'
 			,@start_date			=	'2025-01-04'
 			,@start_time			=	'18:00'
-			,@interval				=	14	
-			,@number_of_pairs		=	2
-			,@stacionar				=	0
+			--,@pair_time				
+			--,@break_time
+			--,@interval				=	14	
+			--,@number_of_pairs		=	2
+			--,@stacionar				=	0
 			,@message				=	@messageUser	OUT
 			;
 --EXEC sp_SelectSchedule N'SPU 411', N'Процедурное%';
