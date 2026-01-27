@@ -12,10 +12,14 @@ EXEC	sp_InsertSchedule
 			,@start_date			=	'2025-01-04'
 			,@start_time			=	'18:00'
 			,@interval				=	14	
-			,@number_of_pairs		=	2	
+			,@number_of_pairs		=	2
+			,@stacionar				=	0
 			,@message				=	@messageUser	OUT
 			;
-EXEC sp_SelectSchedule N'SPU 411', N'Процедурное%';
+--EXEC sp_SelectSchedule N'SPU 411', N'Процедурное%';
+EXEC sp_SelectSheduleAddDayWeek
+			@group_name				=	N'SPU 411'
+			,@discipline_name		=	N'Процедурное%'
 		
 
 

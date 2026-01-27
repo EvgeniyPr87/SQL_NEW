@@ -14,6 +14,7 @@ ALTER PROCEDURE sp_InsertSchedule
 			,@break_time		AS		TINYINT			=	15
 			,@interval			AS		SMALLINT		=	7
 			,@number_of_pairs	AS		TINYINT			=	1
+			,@stacionar			AS		BIT				=	1
 			,@message			AS		NVARCHAR(255)	=	' ' OUT
 AS
 BEGIN
@@ -28,6 +29,8 @@ BEGIN
 	DECLARE @date				AS		DATE			=	@start_date;
 	DECLARE	@current_pairs		AS		TINYINT			=	0;
 	DECLARE @time				AS		TIME;
+
+
 
 	--DECLARE	@day TABLE(namber_day TINYINT, @day_of_week NVARCHAR(70) );
 	--INSERT  @day	(namber_day,@day_of_week)
@@ -56,6 +59,12 @@ BEGIN
 		SET @message	=	'Указанный преподаватель не найден в БД';
 		RETURN;
 	END;
+
+	IF(@stacionar!=1)
+	BEGIN
+	PRINT N'Полустационар';
+	SET @number_of_lessons=@number_of_lessons/2;
+	END
 
 	WHILE (@lesson_number<@number_of_lessons)
 	BEGIN

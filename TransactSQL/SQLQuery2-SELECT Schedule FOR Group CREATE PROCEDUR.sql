@@ -16,9 +16,9 @@ BEGIN
 				[Преподавтель]	=		FORMATMESSAGE(N'%s %s %s',last_name, first_name, middle_name),
 				[Статус]		=		IIF(spent=1, N'Проведено',N'Запланированно')
 	FROM		Schedule
-	JOIN		Groups			ON		group]=group_id
-	JOIN		Disciplines		ON		iscipline=	discipline_id
-	JOIN		Teachers		ON		eacher=teacher_id
+	JOIN		Groups			ON		[group]=group_id
+	JOIN		Disciplines		ON		discipline=	discipline_id
+	JOIN		Teachers		ON		teacher=teacher_id
 	WHERE		group_name		=		group_name
 	AND			discipline_name	LIKE	@discipline_name
 END
