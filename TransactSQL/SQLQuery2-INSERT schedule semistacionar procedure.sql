@@ -13,8 +13,8 @@ ALTER PROCEDURE sp_InsertSchedule
 			,@pair_time			AS		TINYINT			=	80
 			,@break_time		AS		TINYINT			=	15
 			,@interval			AS		SMALLINT		=	7
-			,@number_of_pairs	AS		TINYINT			=	2
-			,@stacionar			AS		BIT				=	0
+			,@number_of_pairs	AS		TINYINT			=	1
+			,@stacionar			AS		BIT				=	1
 			,@message			AS		NVARCHAR(255)	=	' ' OUT
 AS
 BEGIN
@@ -100,12 +100,13 @@ BEGIN
 			-- нужно привязать интервал к дням недели
 			SET @date=DATEADD(DAY,@interval,@date);
 	END
-
+	---------------------------------------------------------
+	--для проверки
 	PRINT @group;
 	PRINT @discipline;
 	PRINT @current_pairs;
 	PRINT @number_of_lessons;
-
+	---------------------------------------------------------
 
 END
 

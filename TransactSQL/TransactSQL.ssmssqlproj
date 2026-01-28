@@ -57,6 +57,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery2-INSERT schedule semistacionar procedure.sql</FullPath>
         </FileNode>
+        <FileNode Name="SQLQuery2-SELECT mySchedule CREATE PROCEDURE.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-5H1KDVCM\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-5H1KDVCM\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery2-SELECT mySchedule CREATE PROCEDURE.sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQuery2-SELECT Schedule FOR Group CREATE PROCEDUR.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-5H1KDVCM\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>LAPTOP-5H1KDVCM\SQLEXPRESS</AssociatedConnSrvName>

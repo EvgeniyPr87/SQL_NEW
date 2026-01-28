@@ -25,6 +25,7 @@ BEGIN
 END
 
 		SELECT
+
 					[Группа			]			=		group_name,
 					[День недели	]			=		DATENAME(WEEKDAY,[date]),
 					[Дата			]			=		[date],
@@ -37,8 +38,8 @@ END
 		JOIN		Groups						ON		[group]=group_id
 		JOIN		Disciplines					ON		discipline=discipline_id
 		JOIN		Teachers					ON		teacher=teacher_id
-		WHERE		[group]=@group
-		AND			discipline=@discipline
+		WHERE		[group]	=@group
+		AND			discipline=@discipline	
 		ORDER BY	[date], [time];
 
 END
