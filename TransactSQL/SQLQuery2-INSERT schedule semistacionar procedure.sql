@@ -9,7 +9,6 @@ ALTER PROCEDURE sp_InsertSchedule
 			,@teacher_name		AS		NVARCHAR(150)
 			,@start_date		AS		DATE
 			,@start_time		AS		TIME
-			--,@day_of_week		AS		NVARCHAR(70)
 			,@pair_time			AS		TINYINT			=	80
 			,@break_time		AS		TINYINT			=	15
 			,@interval			AS		SMALLINT		=	7
@@ -29,14 +28,6 @@ BEGIN
 	DECLARE @date				AS		DATE			=	@start_date;
 	DECLARE	@current_pairs		AS		TINYINT			=	0;
 	DECLARE @time				AS		TIME;
-
-
-
-	--DECLARE	@day TABLE(namber_day TINYINT, @day_of_week NVARCHAR(70) );
-	--INSERT  @day	(namber_day,@day_of_week)
-	--VALUES			(1, N'понедельник' ),(2,N'вторник' ),(3,N'среда' ),(4,N'четверг'),(5,N'пятница'),(6,N'суббота'),(7,N'воскресенье');
-
-					
 
 			--проверяем введенные данные:
 	--IF NOT EXISTS(SELECT TOP 1 * FROM Groups WHERE group_id=@group)
