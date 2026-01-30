@@ -1,45 +1,37 @@
---SQLQuery2-SELECT mySchedule CREATE PROCEDURE.sql
+п»ї--SQLQuery2-SELECT mySchedule CREATE PROCEDURE.sql
 
 USE SPU_411_Import;
 GO
 
 ALTER PROCEDURE sp_SelectSheduleAddDayWeek
 		 @group_name						AS		NVARCHAR(24)
-		,@discipline_name					AS		NVARCHAR(150)
 		
 AS
 BEGIN
 
 DECLARE	@group			AS		INT				=		(SELECT group_id FROM Groups WHERE group_name LIKE @group_name );
-DECLARE	@discipline		AS		SMALLINT		=		(SELECT discipline_id FROM Disciplines WHERE discipline_name LIKE @discipline_name);
 
 IF @group IS NULL
 BEGIN
-		PRINT 'Группа не найдена'
+		PRINT 'Р“СЂСѓРїРїР° РЅРµ РЅР°Р№РґРµРЅР°'
 		RETURN
 END
-IF @discipline IS NULL
-BEGIN
-		PRINT 'Дисциплина не найдена'
-		RETURN
-END
+
 
 		SELECT
 
-					[Группа			]			=		group_name,
-					[День недели	]			=		DATENAME(WEEKDAY,[date]),
-					[Дата			]			=		[date],
-					[Время			]			=		[time],
-					[Дисциплина		]			=		discipline_name,
-					[Преподаватель	]			=		FORMATMESSAGE(N'%s %s. %s.',last_name,LEFT(first_name,1),LEFT(middle_name,1)),
-					[Статус			]			=		IIF(spent=1,N'Проведено',N'Запланировано')
+					[Р“СЂСѓРїРїР°			]			=		group_name,
+					[Р”РµРЅСЊ РЅРµРґРµР»Рё	]			=		DATENAME(WEEKDAY,[date]),
+					[Р”Р°С‚Р°			]			=		[date],
+					[Р’СЂРµРјСЏ			]			=		[time],
+					[Р”РёСЃС†РёРїР»РёРЅР°		]			=		discipline_name,
+					[РџСЂРµРїРѕРґР°РІР°С‚РµР»СЊ	]			=		FORMATMESSAGE(N'%s %s. %s.',last_name,LEFT(first_name,1),LEFT(middle_name,1)),
+					[РЎС‚Р°С‚СѓСЃ			]			=		IIF(spent=1,N'РџСЂРѕРІРµРґРµРЅРѕ',N'Р—Р°РїР»Р°РЅРёСЂРѕРІР°РЅРѕ')
 
 		FROM		Schedule
 		JOIN		Groups						ON		[group]=group_id
 		JOIN		Disciplines					ON		discipline=discipline_id
 		JOIN		Teachers					ON		teacher=teacher_id
-		WHERE		[group]	=@group
-		AND			discipline=@discipline	
+		WHERE		[group]	=@group	
 		ORDER BY	[date], [time];
-
 END
