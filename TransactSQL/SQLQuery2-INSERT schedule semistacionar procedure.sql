@@ -33,21 +33,18 @@ BEGIN
 	DECLARE	@days_of_week		TABLE	(number_day INT);
 
 			--проверяем введенные данные:
-	--IF NOT EXISTS(SELECT TOP 1 * FROM Groups WHERE group_id=@group)
 	IF @group IS NULL
 	BEGIN
 		SET @message	=	'Данной группы не существует в БД';
 		RETURN;
 	END
 
-	--IF NOT EXISTS(SELECT TOP 1 * FROM Disciplines WHERE discipline_id=@discipline)
 	IF @discipline IS NULL
 	BEGIN
 		SET @message	=	'Данной дисциплины не найдено в БД';
 		RETURN;
 	END
 
-	--IF NOT EXISTS(SELECT TOP 1 * FROM Teachers WHERE teacher_id=@teacher)
 	IF @teacher IS NULL
 	BEGIN
 		SET @message	=	'Указанный преподаватель не найден в БД';
@@ -111,7 +108,6 @@ BEGIN
 
 				SET @current_pairs=@current_pairs+1;
 
-				--IF (@current_pairs!=@number_of_pairs AND @lesson_number<@number_of_lessons)
 				SET @time=DATEADD(MINUTE,(@pair_time+@break_time),@time);
 		
 		END
