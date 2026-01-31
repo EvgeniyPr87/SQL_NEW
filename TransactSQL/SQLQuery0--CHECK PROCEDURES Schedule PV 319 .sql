@@ -1,0 +1,20 @@
+--SQLQuery0--CHECK PROCEDURES Schedule PV 319 .sql
+
+USE SPU_411_Import;
+
+ALTER PROCEDURE sp_InsertSchedule
+			 @group_name		=	N'PV_319'
+			,@discipline_name	=	N'Процедурное%'
+			,@teacher_name		=	N'Ковтун'	
+			,@start_date		=	'2024-10-26'
+			,@start_time		=	'18:30'
+			--,@pair_time		=	80
+			--,@break_time		=	15
+			,@day_of_week		=	'2,4,6'
+			--,@interval		=	7
+			,@number_of_pairs	=	2
+			,@stacionar			=	1
+			;
+
+EXEC sp_SelectSheduleAddDayWeek
+			@group_name			=	N'%319%'

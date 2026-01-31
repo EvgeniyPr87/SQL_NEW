@@ -2,5 +2,5 @@
 
 USE SPU_411_Import;
 
-DELETE FROM Schedule WHERE [group]=11;
-SELECT	*	FROM Schedule WHERE [group]=11;
+DELETE FROM Schedule WHERE [group]=319;
+SELECT	*	FROM Schedule WHERE [group]=319;

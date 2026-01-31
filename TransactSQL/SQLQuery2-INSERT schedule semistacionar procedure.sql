@@ -11,10 +11,12 @@ ALTER PROCEDURE sp_InsertSchedule
 			,@start_time		AS		TIME
 			,@pair_time			AS		TINYINT			=	80
 			,@break_time		AS		TINYINT			=	15
+			,@day_of_week		AS		NVARCHAR(15)	=	NULL
 			,@interval			AS		SMALLINT		=	7
 			,@number_of_pairs	AS		TINYINT			=	1
 			,@stacionar			AS		BIT				=	1
 			,@message			AS		NVARCHAR(255)	=	' ' OUT
+			
 AS
 BEGIN
 			--создаем переменные и инициализируем их значениями из БД:
@@ -28,6 +30,7 @@ BEGIN
 	DECLARE @date				AS		DATE			=	@start_date;
 	DECLARE	@current_pairs		AS		TINYINT			=	0;
 	DECLARE @time				AS		TIME;
+	DECLARE	@days_of_week		TABLE	(number_day INT);
 
 			--проверяем введенные данные:
 	--IF NOT EXISTS(SELECT TOP 1 * FROM Groups WHERE group_id=@group)
@@ -56,10 +59,34 @@ BEGIN
 	PRINT N'Полустационар';
 	SET @number_of_lessons=@number_of_lessons/2;
 	END
+	---------------------------------------------------
+	IF @day_of_week IS NOT NULL
+	BEGIN
+		INSERT  @days_of_week(number_day)
+		SELECT	CAST(value AS INT)
+		FROM	STRING_SPLIT(@day_of_week,',');
+		WHILE NOT EXISTS (SELECT 1 FROM @days_of_week WHERE number_day=DATEPART(WEEKDAY,@date))
+		BEGIN
+				SET @date=DATEADD(DAY, 1, @date);
+		END
+		SET @interval=7;
+	END
+	------------------------------------------------------
+
+
+
 
 	WHILE (@lesson_number<@number_of_lessons)
 	BEGIN
-
+		
+		IF @day_of_week IS NOT NULL
+		BEGIN
+			WHILE NOT EXISTS (SELECT 1 FROM @days_of_week WHERE number_day=DATEPART(WEEKDAY,@date))
+			BEGIN
+				SET @date=DATEADD(DAY, 1, @date);
+			END
+		END
+		
 		PRINT'--------------------------------';
 		PRINT @discipline_name;
 		PRINT @date;
@@ -72,24 +99,40 @@ BEGIN
 		BEGIN
 			PRINT @time;
 
-		IF NOT EXISTS(SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date AND [time]=@time)
-		BEGIN
+			IF NOT EXISTS(SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date AND [time]=@time)
+			BEGIN
 
-			INSERT Schedule
-					([group],discipline,teacher,[date],[time],spent)
-			VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
-			PRINT @time;
-		END
-			SET @lesson_number=@lesson_number+1;
+				INSERT Schedule
+						([group],discipline,teacher,[date],[time],spent)
+				VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+				PRINT @time;
+			END
+				SET @lesson_number=@lesson_number+1;
 
-			SET @current_pairs=@current_pairs+1;
+				SET @current_pairs=@current_pairs+1;
 
-			--IF (@current_pairs!=@number_of_pairs AND @lesson_number<@number_of_lessons)
-			SET @time=DATEADD(MINUTE,(@pair_time+@break_time),@time);
+				--IF (@current_pairs!=@number_of_pairs AND @lesson_number<@number_of_lessons)
+				SET @time=DATEADD(MINUTE,(@pair_time+@break_time),@time);
 		
 		END
-			-- нужно привязать интервал к дням недели
-			SET @date=DATEADD(DAY,@interval,@date);
+
+		IF @day_of_week IS NOT NULL
+			DECLARE @found_day	BIT	=0;
+			DECLARE @add_day	INT =1;
+			
+			WHILE @found_day=0
+			BEGIN
+				DECLARE @next_day	DATE = DATEADD(DAY,@add_day,@date)
+				IF EXISTS (SELECT 1 FROM @days_of_week WHERE number_day=DATEPART(WEEKDAY,@next_day))
+				BEGIN
+					SET	@date=@next_day;
+					SET @found_day=1;
+				END
+			ELSE
+			BEGIN
+				SET	@add_day=@add_day+1;
+			END
+		END
 	END
 	---------------------------------------------------------
 	--для проверки
