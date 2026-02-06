@@ -1,4 +1,10 @@
 --SQLQuery0-Test(T)
-
+SET DATEFIRST 1;
 USE SPU_411_Import;
-PRINT(dbo.GetLastDate(N'PU_211'));
+
+PRINT(dbo.GetLastDate(N'SPU 411'));
+--PRINT(dbo.GetLastDate(N'PD_212'));
+--PRINT(dbo.GetNextDay(N'PD_212'));
+--PRINT(dbo.GetNextDay(N'PV_319'))
+--PRINT(dbo.GetNextDay(N'SPU 411'));
+PRINT(dbo.GetNextDate(N'SPU 411'));

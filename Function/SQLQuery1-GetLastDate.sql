@@ -13,3 +13,21 @@ BEGIN
 		SET @last_date= (SELECT MAX([date]) FROM Schedule WHERE [group]=@group_id);
 	RETURN @last_date;
 END
+
+---------------------------------------------------------------------------------------------------
+--SQLQuery1-GetLastDate.sql(HW)
+
+
+--USE SPU_411_Import;
+--GO
+
+--ALTER FUNCTION GetLastate (@group_name AS NVARCHAR(24))
+--RETURNS DATE
+--AS
+--BEGIN
+--	DECLARE @group_id	AS	INT		=	(SELECT group_id FROM Groups WHERE group_name=@group_name);
+--	DECLARE	@last_date	AS	DATE	=	NULL;
+--	IF EXISTS (SELECT [group] FROM Schedule WHERE [group]=@group_id)
+--		SET @last_date=(SELECT MAX([date]) FROM Schedule WHERE [group]=@group_id);
+--RETURN @last_date;
+--END
