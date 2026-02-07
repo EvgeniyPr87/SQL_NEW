@@ -33,6 +33,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery1-GetLastDate.sql</FullPath>
         </FileNode>
+        <FileNode Name="SQLQuery1-GetLessonTime(HW).sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-5H1KDVCM\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-5H1KDVCM\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery1-GetLessonTime(HW).sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQuery1-GetNextDate(HW).sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-5H1KDVCM\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>LAPTOP-5H1KDVCM\SQLEXPRESS</AssociatedConnSrvName>
@@ -50,6 +56,12 @@
           <AssociatedConnSrvName>LAPTOP-5H1KDVCM\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>SQLQuery1-GetStartDate.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery1-ValidateScheduleDate(HW).sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-5H1KDVCM\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-5H1KDVCM\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery1-ValidateScheduleDate(HW).sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
