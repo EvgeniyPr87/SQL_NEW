@@ -16,7 +16,7 @@ USE SPU_411_Import;
 --			,@stacionar			=	1;
 
 
-EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++%',N'%Ковтун%';
+--EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++%',N'%Ковтун%';
 
---EXEC sp_SelectSheduleAddDayWeek N'SPU 411';
+EXEC sp_SelectSheduleAddDayWeek N'%411';
 		

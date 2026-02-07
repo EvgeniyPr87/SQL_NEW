@@ -9,4 +9,8 @@ USE SPU_411_Import;
 --PRINT(dbo.GetNextDay(N'SPU 411'));
 --PRINT(dbo.GetNextDate(N'SPU 411'));
 
-EXEC sp_InsertScheduleSemistacionar N'%411',N'Процедурное%C++',N'Ковтун%';
+--EXEC sp_InsertScheduleSemistacionar N'PD_212',N'Процедурное%C++',N'Ковтун%';
+
+--EXEC sp_SelectscheduleFull;
+PRINT (dbo.GetNextDate(N'SPU 411'));
+PRINT (dbo.GetNextDay(N'SPU 411'));
