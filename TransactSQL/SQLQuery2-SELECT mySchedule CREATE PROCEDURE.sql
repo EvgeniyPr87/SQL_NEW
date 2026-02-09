@@ -9,13 +9,13 @@ ALTER PROCEDURE sp_SelectSheduleAddDayWeek
 AS
 BEGIN
 
-DECLARE	@group			AS		INT				=		(SELECT group_id FROM Groups WHERE group_name LIKE @group_name );
+DECLARE	@group			AS		INT				=		(SELECT group_id FROM Groups WHERE group_name = @group_name );
 
-IF @group IS NULL
-BEGIN
-		PRINT 'Группа не найдена'
-		RETURN
-END
+--IF @group IS NULL
+--BEGIN
+--		PRINT 'Группа не найдена'
+--		RETURN
+--END
 
 
 		SELECT
@@ -33,5 +33,5 @@ END
 		JOIN		Disciplines					ON		discipline=discipline_id
 		JOIN		Teachers					ON		teacher=teacher_id
 		WHERE		[group]	=@group	
-		ORDER BY	[date], [time];
+		ORDER BY	 [time];
 END

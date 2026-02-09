@@ -47,6 +47,6 @@ BEGIN
 		SET @pair=@pair+1;
 		SET @lesson_number=@lesson_number+1;
 	END
-		SET @date=DATEADD(WEEK,1,@date);
+		SET @date=DATEADD(WEEKDAY,1,@date);
 	END
 END

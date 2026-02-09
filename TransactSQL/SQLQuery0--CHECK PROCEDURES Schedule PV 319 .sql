@@ -1,6 +1,8 @@
 --SQLQuery0--CHECK PROCEDURES Schedule PV 319 .sql
-
+SET DATEFIRST 1;
 USE SPU_411_Import;
+
+SET LANGUAGE N'Russian';
 
 --EXEC sp_InsertSchedule
 --			 @group_name		=	N'PV_319'
@@ -18,5 +20,7 @@ USE SPU_411_Import;
 
 --EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++%',N'%Ковтун%';
 
-EXEC sp_SelectSheduleAddDayWeek N'%411';
+
+EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++',N'%Ковтун%'
+EXEC sp_SelectSheduleAddDayWeek N'SPU 411';
 		

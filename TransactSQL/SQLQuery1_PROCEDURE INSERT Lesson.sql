@@ -13,9 +13,17 @@ AS
 BEGIN
 	IF NOT EXISTS(SELECT [group] FROM Schedule WHERE [group]=@group AND [date]=@date AND [time]=@time)
 	BEGIN
+	PRINT '-----------------------------------------------------------------';
+	PRINT @group;
+	PRINT @discipline;
+	PRINT @teacher;
+	PRINT @date;
+	PRINT @time;
+	PRINT @lesson_number;
+	PRINT '------------------------------------------------------------------';
 		INSERT Schedule
 				([group],discipline,teacher,[date],[time],spent)
-		VALUES	(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
+		VALUES	(@group, @discipline, @teacher, @date, @time , IIF(@date<GETDATE(),1,0));
 	END
 	SET @time = DATEADD(MINUTE, 95, @time);
 	SET @lesson_number = @lesson_number+1;
