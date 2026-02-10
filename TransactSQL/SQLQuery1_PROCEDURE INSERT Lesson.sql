@@ -5,7 +5,7 @@ GO
 ALTER PROCEDURE sp_InsertLesson
 	 @group				AS	INT
 	,@discipline		AS	SMALLINT
-	,@teacher			AS	INT
+	,@teacher			AS	SMALLINT
 	,@date				AS	DATE
 	,@time				AS	TIME		OUTPUT
 	,@lesson_number		AS	TINYINT		OUTPUT

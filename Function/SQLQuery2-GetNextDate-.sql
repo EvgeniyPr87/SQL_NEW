@@ -6,7 +6,7 @@ ALTER FUNCTION	GetNextDate (@group_name AS NVARCHAR(24))
 RETURNS DATE
 AS
 BEGIN
-	DECLARE @group_id	AS	INT		= (SELECT group_id FROM Groups WHERE group_id LIKE @group_name);
+	DECLARE @group_id	AS	INT		= (SELECT group_id FROM Groups WHERE group_id = @group_name);
 	DECLARE @last_date	AS	DATE	= (SELECT MAX([date]) FROM Schedule WHERE [group]=@group_id);
 	DECLARE @next_date	AS	DATE	= @last_date;
 	DECLARE @interval	AS	SMALLINT;
