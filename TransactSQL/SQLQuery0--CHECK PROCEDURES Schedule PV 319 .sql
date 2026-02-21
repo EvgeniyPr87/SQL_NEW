@@ -21,6 +21,15 @@ SET LANGUAGE N'Russian';
 --EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++%',N'%Ковтун%';
 
 
-EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++',N'%Ковтун%'
-EXEC sp_SelectSheduleAddDayWeek N'SPU 411';
+--EXEC sp_InsertScheduleSemistacionar N'SPU 411',N'Процедурное%C++',N'%Ковтун%'
+--EXEC sp_SelectScheduleFull 
+--PRINT(dbo.GetNewYear(2025));
+--PRINT(dbo.GetSammertimeSadness(2024));
+--PRINT(dbo.GetEasterDate(2026));
+EXEC sp_AddAllHolidayFor	2026
+SELECT
+[date],holiday_name
+FROM	DaysOFF JOIN Holidays ON (holiday=holiday_id)
+WHERE	[date]	BETWEEN N'2026-01-01' AND N'2026-12-31';
+
 		
